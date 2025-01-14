@@ -106,8 +106,19 @@ const App: React.FC = () => {
     return true;
   });
 
-  const deleteTask = (id: number) => {
-    setTasks(tasks.filter((task) => task.id !== id));
+  const deleteTask = async (id: number) => {
+    try {
+      const response = await fetch(`http://localhost:8080/tasks/${id}`, {
+        method: "DELETE",
+      });
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
+    } catch (error) {
+      console.error("Failed to delete tasks:", error);
+    }
   };
   return (
     <>
