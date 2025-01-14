@@ -64,12 +64,34 @@ const App: React.FC = () => {
     }
   };
 
-  const toggleTaskComponent = (id: number) => {
-    setTasks(
-      tasks.map((task) =>
-        task.id === id ? { ...task, completed: !task.completed } : task
-      )
-    );
+  const toggleTaskComponent = async (id: number) => {
+    const taskToUpdate = tasks.find((task) => task.id === id);
+    if (!taskToUpdate) return;
+
+    const updatedTask = { ...taskToUpdate, completed: !taskToUpdate.completed };
+
+    try {
+      const response = await fetch(`http://localhost:8080/tasks/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ completed: updatedTask.completed }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const responseJson = await response.json();
+      const updatedTaskFromServer: Task = responseJson.task;
+
+      setTasks((prevTasks) =>
+        prevTasks.map((task) => (task.id === id ? updatedTaskFromServer : task))
+      );
+    } catch (error) {
+      console.error("failed to update task:", error);
+    }
   };
 
   const completedTasksCounter = useCompletedTasks(tasks);
