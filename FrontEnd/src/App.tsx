@@ -1,12 +1,11 @@
-import './App.css'
+import "./App.css";
 
 function App() {
-
   return (
     <>
-      <h1>Lab 06 - Nazwisko</h1>
+      <h1>Lab 06 - Debowski</h1>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
