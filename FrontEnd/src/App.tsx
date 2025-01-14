@@ -15,15 +15,30 @@ export interface Task {
 }
 
 const App: React.FC = () => {
-  const [tasks, setTasks] = useState<Task[]>(() => {
-    const savedTask = localStorage.getItem("tasks");
-    return savedTask ? JSON.parse(savedTask) : [];
-  });
+  const [tasks, setTasks] = useState<Task[]>([]);
   const [filter, setFilter] = useState<string>("all");
 
+  const fetchTasks = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/tasks");
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+      const fetchedTasks = data.tasks;
+      if (Array.isArray(fetchedTasks)) {
+        setTasks(fetchedTasks);
+      } else {
+        throw new Error("Fetched tasks data is not an array");
+      }
+    } catch (error) {
+      console.error("failed to fetch tastk:", error);
+    }
+  };
+
   useEffect(() => {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-  }, [tasks]);
+    fetchTasks();
+  }, []);
 
   const addTask = (taskName: string) => {
     const newTask: Task = {
