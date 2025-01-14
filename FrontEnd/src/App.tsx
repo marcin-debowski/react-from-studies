@@ -40,13 +40,28 @@ const App: React.FC = () => {
     fetchTasks();
   }, []);
 
-  const addTask = (taskName: string) => {
-    const newTask: Task = {
-      id: Date.now(),
+  const addTask = async (taskName: string) => {
+    const newTask: Omit<Task, "id"> = {
       name: taskName,
       completed: false,
     };
-    setTasks([...tasks, newTask]);
+    try {
+      const response = await fetch("http://localhost:8080/tasks", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newTask),
+      });
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const responseJson = await response.json();
+      const createdTask: Task = responseJson.task;
+      setTasks((prevTasks) => [createdTask, ...prevTasks]);
+    } catch (error) {
+      console.error("Failed to add task:", error);
+    }
   };
 
   const toggleTaskComponent = (id: number) => {
