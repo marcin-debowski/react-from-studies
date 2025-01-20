@@ -39,12 +39,15 @@ const TaskList: React.FC<TaskListProps> = ({
               >
                 <span> {task.name}</span>
                 <div>
-                  <button onClick={() => onToggleTaskComponent(task.id)}>
+                  <button
+                    onClick={() => onToggleTaskComponent(task.id)}
+                    className="completion-button"
+                  >
                     {task.completed ? "Undo" : "Complete"}
                   </button>
                   <button
                     onClick={() => onDeleteTask(task.id)}
-                    className="delete-bnt"
+                    className="delete-btn"
                   >
                     Delete
                   </button>

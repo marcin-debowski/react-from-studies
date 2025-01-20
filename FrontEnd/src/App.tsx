@@ -32,7 +32,7 @@ const App: React.FC = () => {
         throw new Error("Fetched tasks data is not an array");
       }
     } catch (error) {
-      console.error("failed to fetch tastk:", error);
+      console.error("failed to fetch task:", error);
     }
   };
 
