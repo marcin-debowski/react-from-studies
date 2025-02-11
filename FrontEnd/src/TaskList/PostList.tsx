@@ -37,7 +37,7 @@ const PostList: React.FC<PostListProps> = ({ posts, onDeletePost }) => {
                 <div>
                   <button
                     onClick={() => onDeletePost(post.id)}
-                    className="delete-bnt"
+                    className="delete-btn"
                   >
                     Delete
                   </button>

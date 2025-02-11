@@ -10,7 +10,7 @@ export interface Post {
   body: string;
 }
 
-const App: React.FC = () => {
+const App2: React.FC = () => {
   const [posts, setPosts] = useState<Post[]>([]);
 
   const fetchPosts = async () => {
@@ -86,4 +86,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default App2;
