@@ -1,8 +1,1 @@
-{
-    "index": 4,
-    "posts":[
-        {"id":4, "author":"First Author", "body":"More info from First Author"},
-        {"id":2, "author":"Second Author", "body":"Second, very important message"},
-        {"id":1, "author":"First Author", "body":"First message"}
-    ]
-}
+{"index":8,"posts":[{"author":"hjgsda","body":"tu cos jest","id":7},{"id":2,"author":"Second Author","body":"Second, very important message"},{"id":1,"author":"First Author","body":"First message"}]}

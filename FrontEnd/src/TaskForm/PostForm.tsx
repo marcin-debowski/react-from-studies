@@ -1,11 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
 
-interface TaskFormProps {
-  onAddTask: (task: string) => void;
+interface PostFormProps {
+  onAddPost: (post: string) => void;
 }
 
-const TaskForm: React.FC<TaskFormProps> = ({ onAddTask }) => {
-  const [task, setTask] = useState("");
+const PostForm: React.FC<PostFormProps> = ({ onAddPost }) => {
+  const [post, setPost] = useState("");
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
@@ -16,9 +16,9 @@ const TaskForm: React.FC<TaskFormProps> = ({ onAddTask }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (task.trim()) {
-      onAddTask(task);
-      setTask("");
+    if (post.trim()) {
+      onAddPost(post);
+      setPost("");
     }
   };
 
@@ -27,13 +27,13 @@ const TaskForm: React.FC<TaskFormProps> = ({ onAddTask }) => {
       <input
         ref={inputRef}
         type="text"
-        value={task}
-        onChange={(e) => setTask(e.target.value)}
-        placeholder="Add a new task"
+        value={post}
+        onChange={(e) => setPost(e.target.value)}
+        placeholder="Add a new post"
       />
-      <button type="submit">Add Task</button>
+      <button type="submit">Add post</button>
     </form>
   );
 };
 
-export default TaskForm;
+export default PostForm;
