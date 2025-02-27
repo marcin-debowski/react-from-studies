@@ -4,7 +4,7 @@
 
 Project contains **BackEnd** and **FrontEnd** part
 
-Made by: `Write your surname and name here`
+Made by: `Marcin Dębowski`
 
 ## Requirements
 
